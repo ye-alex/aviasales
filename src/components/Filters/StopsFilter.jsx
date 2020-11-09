@@ -6,7 +6,6 @@ import { setStopsAction } from '../../state/actions';
 const StopsFilter = () => {
   const initialStops = useSelector(state => state.stops);
   const stops = useSelector(state => state.mainState.stops);
-  const checkedStops = [...stops];
   const dispatch = useDispatch();
 
   const setStops = (event, stop) => {
@@ -24,8 +23,8 @@ const StopsFilter = () => {
       return;
     }
 
-    if (checkedStops.includes(id)) {
-      const filteredStops = checkedStops.filter(item => item !== id);
+    if (stops.includes(id)) {
+      const filteredStops = stops.filter(item => item !== id);
 
       document.getElementById('all').checked = false;
       dispatch(setStopsAction(filteredStops));
@@ -42,7 +41,7 @@ const StopsFilter = () => {
       return;
     }
 
-    dispatch(setStopsAction([...checkedStops, id]));
+    dispatch(setStopsAction([...stops, id]));
   };
 
   const setChecked = (value = true) =>
