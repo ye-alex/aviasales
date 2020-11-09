@@ -1,0 +1,39 @@
+.stops-filter {
+  width: 210px;
+  div {
+    @include display-flex(null, null, center);
+    position: relative;
+    padding-bottom: 5px;
+
+    &:hover {
+      span {
+        display: inline;
+      }
+    }
+
+    span,
+    label,
+    input {
+      cursor: pointer;
+    }
+
+    input[type='checkbox'] {
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+
+      &:checked {
+        color: $brand-color !important;
+        border-color: $brand-color !important;
+        background: none;
+      }
+    }
+
+    span {
+      position: absolute;
+      right: 0;
+      display: none;
+      color: $brand-color;
+    }
+  }
+}

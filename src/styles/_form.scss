@@ -1,0 +1,93 @@
+.form-container {
+  @include display-flex(center, row, center);
+  width: 500px;
+  background-color: #032b34;
+  border-radius: 10px;
+  position: relative;
+  padding: 50px 0;
+
+  form {
+    width: 80%;
+
+    .form-buttons {
+      @include display-flex(space-between);
+      margin-top: 10px;
+    }
+
+    label,
+    .close-btn {
+      text-transform: capitalize;
+      color: $brand-white;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      cursor: pointer;
+      width: 25px;
+      height: 25px;
+      font-size: 1.25rem;
+      text-align: center;
+    }
+  }
+
+  fieldset {
+    @include display-flex(space-between, row, baseline);
+    border: none;
+
+    .input-wrapper {
+      position: relative;
+      padding-bottom: 20px;
+    }
+
+    input {
+      background-color: rgba(0, 171, 205, 0.5);
+      color: $brand-white;
+      width: 200px;
+      height: 30px;
+      font-size: 1rem;
+      padding: 0 10px;
+      outline: none;
+      border: 1px solid $brand-color;
+      border-radius: 5px;
+
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover, 
+      &:-webkit-autofill:focus {
+        transition: background-color 5000s ease-in-out 0s;
+        -webkit-text-fill-color: $brand-white;
+      }
+
+      &.error {
+        border-color: $brand-error;
+      }
+    }
+
+    .error-message {
+      position: absolute;
+      font-size: 0.75rem;
+      color: $brand-error;
+    }
+  }
+}
+
+@media #{$laptop-down} {
+  .form-container {
+    max-width: 310px;
+    padding: 30px 0;
+
+    fieldset {
+      flex-direction: column;
+    }
+  } 
+}
+
+@media screen and (orientation:landscape)
+and (min-device-width: 319px) 
+and (max-device-width: 896px) {
+  .form-container {
+    top: 50%;
+    margin-bottom: 10%;
+  }
+}

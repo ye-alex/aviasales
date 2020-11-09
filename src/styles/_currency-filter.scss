@@ -1,0 +1,29 @@
+.currency-filter {
+  width: 210px;
+  .button-list {
+    button {
+      padding: 10px 15px;
+      border: 1px solid $brand-color;
+      color: $brand-color;
+      background: $brand-white;
+      cursor: pointer;
+      outline: none;
+      
+      &:first-child {
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
+        border-right: none;
+      }
+
+      &:last-child {
+        border-bottom-right-radius: 5px;
+        border-top-right-radius: 5px;
+        border-left: none;
+      }
+    }
+    .active {
+      background-color: $brand-color;
+      color: $brand-white;
+    }
+  }
+}
