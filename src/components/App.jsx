@@ -6,7 +6,7 @@ import TicketsList from './TicketsList/';
 import logoImg from '../assets/logo.png'
 
 const App = () => {
-  const isShowModal = useSelector(state => state.mainState.isShowModal);
+  const isShowModal = useSelector(state => state.isShowModal);
 
   return (
     <div className='main-content'>

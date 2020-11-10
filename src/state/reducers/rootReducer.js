@@ -1,5 +1,10 @@
 import tickets from '../../json/tickets.json';
-import { SET_CURRENCY, SET_SHOW_MODAL, SET_STOPS } from '../actions/';
+import {
+  SET_CURRENCY,
+  SET_SHOW_MODAL,
+  SET_STOPS,
+  GET_INITIAL_STOPS,
+} from '../actions/';
 
 const initialState = {
   ...tickets,
@@ -20,13 +25,14 @@ const initialState = {
       value: 'EUR',
       symbol: '€',
       rate: 92.97,
-    }
+    },
   ],
   stops: [],
-  isShowModal: false, 
+  initialStops: [],
+  isShowModal: false,
 };
 
-const mainStateReducer = (state = initialState, action) => {
+const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_STOPS:
       return {
@@ -42,10 +48,23 @@ const mainStateReducer = (state = initialState, action) => {
       return {
         ...state,
         isShowModal: action.payload,
-      }
+      };
+    case GET_INITIAL_STOPS:
+      const stopsList = [];
+
+      tickets.tickets.map(item => {
+        const itemToStr = item.stops.toString();
+
+        return !stopsList.includes(itemToStr) && stopsList.push(itemToStr);
+      });
+
+      return {
+        ...state,
+        initialStops: stopsList.sort(),
+      };
     default:
       return state;
   }
 };
 
-export default mainStateReducer;
+export default rootReducer;

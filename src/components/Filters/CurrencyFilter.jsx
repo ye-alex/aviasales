@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCurrencyAction } from '../../state/actions/';
 
 const CurrencyFilter = () => {
-  const mainState = useSelector(state => state.mainState);
+  const mainState = useSelector(state => state);
   const dispatch = useDispatch();
   const { currencyList, activeCurrency } = mainState;
 

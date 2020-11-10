@@ -4,7 +4,7 @@ import { setToggleModalAction } from '../../state/actions';
 import Ticket from '../Ticket/';
 
 const TicketsList = () => {
-  const mainState = useSelector(state => state.mainState);
+  const mainState = useSelector(state => state);
   const dispatch = useDispatch();
   const { stops, tickets, currencyData, activeCurrency } = mainState;
 
@@ -47,11 +47,7 @@ const TicketsList = () => {
   return (
     <div className='tickets-list'>
       {updatePriceAndSort().map((item, key) => (
-        <Ticket
-          ticket={item}
-          key={item.carrier + key}
-          openModal={openModal}
-        />
+        <Ticket ticket={item} key={item.carrier + key} openModal={openModal} />
       ))}
     </div>
   );

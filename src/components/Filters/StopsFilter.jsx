@@ -1,12 +1,17 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getText } from '../../helpers/helper';
-import { setStopsAction } from '../../state/actions';
+import { getInitialStops, setStopsAction } from '../../state/actions';
 
 const StopsFilter = () => {
-  const initialStops = useSelector(state => state.stops);
-  const stops = useSelector(state => state.mainState.stops);
+  const mainState = useSelector(state => state);
   const dispatch = useDispatch();
+  const {stops, initialStops } = mainState;
+
+  useEffect(() => {
+    dispatch(getInitialStops());
+  }, []);
 
   const setStops = (event, stop) => {
     const { id, checked } = event.target;
