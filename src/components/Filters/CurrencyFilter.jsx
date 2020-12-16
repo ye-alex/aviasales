@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrencyAction } from '../../state/actions/';
+import { filterTickets, setCurrencyAction } from '../../state/actions/';
 
 const CurrencyFilter = () => {
   const mainState = useSelector(state => state);
@@ -8,8 +8,9 @@ const CurrencyFilter = () => {
   const { currencyList, activeCurrency } = mainState;
 
   const setCurrency = event => {
-    const currency = event.target.dataset.currency;
+    const { currency } = event.target.dataset;
     dispatch(setCurrencyAction(currency));
+    dispatch(filterTickets());
   };
 
   return (

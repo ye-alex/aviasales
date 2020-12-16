@@ -2,7 +2,7 @@ import React from 'react';
 import BrandImg from '../../assets/brand.png';
 import { getText } from '../../helpers/helper';
 
-const Ticket = ({ ticket, openModal }) => {
+const Ticket = ({ ticket, openModal, currencyData }) => {
   const {
     arrival_date: arrivalDate,
     arrival_time: arrivalTime,
@@ -17,7 +17,8 @@ const Ticket = ({ ticket, openModal }) => {
     symbol,
   } = ticket;
 
-  const stopsText = !!stops && getText(stops);
+  const stopsText = stops > 0 && getText(stops);
+  const currencySymbol = symbol ? symbol : currencyData[0].symbol;
 
   return (
     <div className='ticket-content'>
@@ -25,7 +26,7 @@ const Ticket = ({ ticket, openModal }) => {
         <img src={BrandImg} alt="brand" />
         <button onClick={openModal}>
           <div>Купить</div>
-          за {price} {symbol}
+          за {price} {currencySymbol}
         </button>
       </div>
       <div className='departure-info'>

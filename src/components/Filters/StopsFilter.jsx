@@ -2,12 +2,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getText } from '../../helpers/helper';
-import { getInitialStops, setStopsAction } from '../../state/actions';
+import { filterTickets, getInitialStops, setStopsAction } from '../../state/actions';
 
 const StopsFilter = () => {
   const mainState = useSelector(state => state);
   const dispatch = useDispatch();
-  const {stops, initialStops } = mainState;
+  const { initialStops } = mainState;
 
   useEffect(() => {
     dispatch(getInitialStops());
@@ -15,38 +15,20 @@ const StopsFilter = () => {
 
   const setStops = (event, stop) => {
     const { id, checked } = event.target;
+    const stopId = stop ? stop : id;
 
     if (id === 'all') {
-      if (checked) {
-        dispatch(setStopsAction(initialStops));
-        setChecked();
-      } else {
-        dispatch(setStopsAction([]));
-        setChecked(false);
-      }
-
-      return;
-    }
-
-    if (stops.includes(id)) {
-      const filteredStops = stops.filter(item => item !== id);
-
-      document.getElementById('all').checked = false;
-      dispatch(setStopsAction(filteredStops));
-
-      return;
-    }
-
-    if (stop) { 
+      checked ? setChecked() : setChecked(false);
+    } else if (stop) { 
       setChecked(false);
       document.getElementById('all').checked = false;
       document.getElementById(stop).checked = true;
-      dispatch(setStopsAction([stop]));
-
-      return;
+    } else {
+      document.getElementById('all').checked = false;
     }
 
-    dispatch(setStopsAction([...stops, id]));
+    dispatch(setStopsAction(stopId, stop));
+    dispatch(filterTickets());
   };
 
   const setChecked = (value = true) =>
